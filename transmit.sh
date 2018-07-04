@@ -2,7 +2,7 @@
 
 # Wait for the network to come up
 while ! ping -c 1 -W 1 192.168.1.1; do
-    echo "Waiting for 192.168.1.1 - network interface might be down..."
+    #echo "Waiting for 192.168.1.1 - network interface might be down..."
     sleep 1
 done
 
