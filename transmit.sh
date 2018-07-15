@@ -9,5 +9,5 @@ done
 # Once the network is up, then start the script
 gst-launch-1.0 -v \
 	v4l2src device=/dev/video0 ! queue ! video/x-h264,width=1920,height=1080,framerate=30/1 ! h264parse ! rtph264pay ! udpsink host=224.1.1.1 port=5001 auto-multicast=true \
-	alsasrc device=hw:1 ! audio/x-raw, rate=32000, channels=2, format=S16LE ! audioconvert ! mulawenc ! rtppcmupay ! application/x-rtp, payload=96 ! udpsink host=224.1.1.1 port=5002 auto-multicast=true 
+	alsasrc device=hw:1 ! audio/x-raw, rate=32000, channels=2, format=S16LE ! audioconvert ! queue ! interleave ! audioresample ! audio/x-raw, rate=8000 ! mulawenc ! rtppcmupay ! application/x-rtp, payload=96 ! udpsink host=224.1.1.1 port=5002 auto-multicast=true 
 
